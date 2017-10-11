@@ -1,0 +1,55 @@
+<template name="department">
+    <div class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>{{name}}</legend>
+
+            <!-- Button -->
+            <div class="form-group department">
+                <label class="col-md-4 control-label" for="edit"></label>
+                <div class="col-md-4">
+                    <button id="edit" name="edit" class="btn btn-success">Nueva Persona</button>
+                </div>
+            </div>
+
+            <form class="form-deparment">
+
+                <!-- Text input-->
+                <div class="form-group department" style="display: none">
+                    <label class="col-md-4 control-label" for="department"> Nombre </label>
+                    <div class="col-md-4">
+                        <input id="departmentName" name="departmentName" type="text" placeholder="" class="form-control input-md" required=""> 
+
+                    </div>
+                </div>
+
+                <!-- Button (Double) -->
+                <div class="form-group department" style="display: none">
+                    <label class="col-md-4 control-label" for="save"></label>
+                    <div class="col-md-8">
+                        <button id="save" name="save" class="btn btn-success">Guardar</button>
+                        <button id="cancel" name="cancel" class="btn btn-default">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+
+        </fieldset>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Personas</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each people}}
+            <tr>
+                <td>{{this}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>

@@ -1,0 +1,171 @@
+<template name='paperwork'>
+    <fieldset class="form-horizontal">
+
+        <!-- Form Name -->
+        <legend>Detalle Carta</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="origin">Origen</label>
+            <div class="col-md-4">
+                <input id="origin" name="origin" type="text" placeholder="" class="form-control input-md" readonly value="{{origin}}">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="department">Departamento</label>
+            <div class="col-md-4">
+                <input id="department" name="department" type="text" placeholder="" class="form-control input-md" readonly value="{{route}}">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="destination">Destino</label>
+            <div class="col-md-4">
+                <input id="destination" name="destination" type="text" placeholder="" class="form-control input-md" readonly value="{{person}}">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="createdAt">Fecha de Entrega</label>
+            <div class="col-md-4">
+                <input id="createdAt" name="createdAt" type="text" placeholder="" class="form-control input-md" readonly value="{{convertDate createdAt}}">
+
+            </div>
+        </div>
+
+        {{#if type}}
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="type">Tipo de correspondencia</label>
+            <div class="col-md-4">
+                <select id="type" name="type" class="form-control" disabled>
+                <option value="{{type}}">{{type}}</option>
+            </select>
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="state">Estado</label>
+            <div class="col-md-4">
+                <select id="state" name="state" class="form-control" disabled>
+                <option selected="{{selectedState 'pending'}}" value="pending">Pendiente</option>
+                <option selected="{{selectedState 'accepted'}}" value="accepted">Aceptado</option>
+                <option selected="{{selectedState 'rejected'}}" value="rejected">Rechazado</option>
+            </select>
+            </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="subject">Asunto</label>
+            <div class="col-md-4">
+                <textarea class="form-control" id="subject" name="subject" readonly>{{subject}}</textarea>
+            </div>
+        </div>
+
+        <!-- Create the editor container -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="editor"></label>                    
+            <div class="col-md-8">
+                <div id="editor">
+                    {{data}} lallalala
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="save"></label>
+            <div class="col-md-4">
+                <a href="/paperworks" class="btn btn-default btn-block">Atras</a>
+            </div>
+        </div>
+    </fieldset>
+
+    <!--break break break-->
+    <br><br><br>
+
+    <div class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Hoja de ruta</legend>
+
+            <!-- Button -->
+            <div class="form-group routes">
+                <label class="col-md-4 control-label" for="edit"></label>
+                <div class="col-md-4">
+                    <button id="edit" name="edit" class="btn btn-success">Nueva Ruta</button>
+                </div>
+            </div>
+
+            <form class="form-routes">
+
+                <!-- Select Basic -->
+                <div class="form-group routes" style="display: none">
+                    <label class="col-md-4 control-label" for="route">Departamento</label>
+                    <div class="col-md-4">
+                        <select id="route" name="route" class="form-control" required="">    
+                        <option disabled>Seleccione un departamento</option>
+                    
+                        {{#each departments}}
+                        <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group routes" style="display: none">
+                    <label class="col-md-4 control-label" for="person">Persona</label>
+                    <div class="col-md-4">
+                        <select id="person" name="person" class="form-control" required=""> 
+                        <option disabled>Seleccione una persona</option>
+                       
+                        {{#each people}}
+                        <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                    </div>
+                </div>
+
+                <!-- Button (Double) -->
+                <div class="form-group routes" style="display: none">
+                    <label class="col-md-4 control-label" for="save"></label>
+                    <div class="col-md-8">
+                        <button id="save" name="save" class="btn btn-success">Guardar</button>
+                        <button id="cancel" name="cancel" class="btn btn-default">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+
+        </fieldset>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Departamento</th>
+                <th>Persona</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each routes}}
+            <tr>
+                <td>{{route}}</td>
+                <td>{{person}}</td>
+                <td>{{convertDate createdAt}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>

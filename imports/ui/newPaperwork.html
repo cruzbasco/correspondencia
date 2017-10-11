@@ -1,0 +1,103 @@
+<template name="newPaperwork">
+
+    <form class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Nueva Carta</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="origin">Origen</label>
+                <div class="col-md-4">
+                    <input id="origin" name="origin" type="text" placeholder="" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group routes">
+                <label class="col-md-4 control-label" for="route">Departamento</label>
+                <div class="col-md-4">
+                    <select id="route" name="route" class="form-control" required="">    
+                        <option disabled>Seleccione un departamento</option>
+                    
+                        {{#each departments}}
+                        <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group routes">
+                <label class="col-md-4 control-label" for="person">Persona</label>
+                <div class="col-md-4">
+                    <select id="person" name="person" class="form-control" required=""> 
+                        <option disabled>Seleccione una persona</option>
+                       
+                        {{#each people }}
+                        <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="type">Tipo de correspondencia</label>
+                <div class="col-md-4">
+                    <select id="type" name="type" class="form-control">
+                        {{#each paperworkTypes}}
+                        <option value="{{type}}">{{type}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="state">Estado</label>
+                <div class="col-md-4">
+                    <select id="state" name="state" class="form-control">
+                        <option value="pending">Pendiente</option>
+                        <option value="accepted">Aceptado</option>
+                        <option value="rejected">Rechazado</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="subject">Asunto</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" id="subject" name="subject"></textarea>
+                </div>
+            </div>
+
+            <!-- Create the editor container -->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="editor"></label>                    
+                <div class="col-md-8">
+                    <div id="editor">
+                    <p>Hello World!</p>
+                    <p>Some initial <strong>bold</strong> text</p>
+                    <p><br></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="save"></label>
+                <div class="col-md-8">
+                    <button id="save" name="save" class="btn btn-success">Guardar</button>
+                    <a href="/paperworks" class="btn btn-default">Atras</a>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+</template>

@@ -1,0 +1,54 @@
+<template name="paperworkTypes">
+    <div class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Tipo de Correspondencia</legend>
+
+            <!-- Button -->
+            <div class="form-group paperworkTypes">
+                <label class="col-md-4 control-label" for="edit"></label>
+                <div class="col-md-4">
+                    <button id="edit" name="edit" class="btn btn-success">Nuevo Tipo de Correspondencia</button>
+                </div>
+            </div>
+
+            <form class="form-paperworkTypes">
+
+                <!-- Text input-->
+                <div class="form-group paperworkTypes" style="display: none">
+                    <label class="col-md-4 control-label" for="PaperworkType"> Tipo </label>
+                    <div class="col-md-4">
+                        <input id="paperworkType" name="paperworkType" type="text" placeholder="" class="form-control input-md" required=""> 
+
+                    </div>
+                </div>
+
+                <!-- Button (Double) -->
+                <div class="form-group paperworkTypes" style="display: none">
+                    <label class="col-md-4 control-label" for="save"></label>
+                    <div class="col-md-8">
+                        <button id="save" name="save" class="btn btn-success">Guardar</button>
+                        <button id="cancel" name="cancel" class="btn btn-default">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+
+        </fieldset>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tipos de Correspondencias</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each paperworkTypes}}
+            <tr>
+                <td>{{type}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>

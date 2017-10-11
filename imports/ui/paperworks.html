@@ -1,0 +1,45 @@
+<template name="paperworks">
+    <div class="text-right">
+        <a href="/newPaperwork" class="btn btn-success">Nueva Carta</a>
+    </div>
+    <div>
+        <fieldset class="form-horizontal">
+
+            <!-- Form Name -->
+            <legend>Buscar</legend>
+
+            <!-- Text input-->
+            <div class="form-group search-teacher">
+                <label class="col-md-4 control-label" for="search"><i class="fa fa-search"></i> </label>
+                <div class="col-md-4">
+                    <input id="search" name="search" type="text" placeholder="" class="form-control input-md">
+
+                </div>
+            </div>
+
+        </fieldset>
+    </div>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Origen</th>
+                <th>Departamento</th>
+                <th>Destino</th>
+                <th>Fecha de Entrega</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each paperworks}}
+            <tr>
+                <td>{{origin}}</td>
+                <td>{{route}}</td>
+                <td>{{person}}</td>
+                <td>{{convertDate createdAt}}</td>
+                <td><a href="/paperwork/{{_id}}" class="btn btn-info">Detalle</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>
