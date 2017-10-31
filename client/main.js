@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var NodeRSA = require('node-rsa');
   var key = new NodeRSA({b: 512});
   
-  var text = 'concha culo!';
+  var text = 'hola q tal!';
   var encrypted = key.encrypt(text, 'base64');
   console.log('encrypted: ', encrypted);
   var decrypted = key.decrypt(encrypted, 'utf8');
