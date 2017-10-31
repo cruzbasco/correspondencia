@@ -106,6 +106,10 @@ Template.newPaperwork.events({
             routes: [{route: route, person: person, createdAt: Date.now() }] ,
         });
 
+        Meteor.call('PaperworkTypes.increment', type);        
+
+
+
         if (!Notification) {
             alert('Desktop notifications not available in your browser. Try Chromium.'); 
             return;

@@ -1,18 +1,17 @@
 import { Template } from 'meteor/templating';
 import $ from "jquery";
+import moment from 'moment';
+import 'moment/locale/es';
  
-import { Departments } from '../api/departments.js';
+import { Departments } from '../../api/departments.js';
  
-import './departments.html';
- 
-Template.departments.helpers({
-  departments(){
-    return Departments.find({}, { sort: { name: 1 } });
-  },
+import './department.html';
+
+Template.department.helpers({
 });
 
 
-Template.departments.events({
+Template.department.events({
     'click #edit'(event, template) {
         template.$(".department").toggle();
     },
@@ -26,10 +25,13 @@ Template.departments.events({
         // Get value from form element
         const target = event.target;
         const name = target.departmentName.value;
+
+        moment.locale('es');
         // Insert a task into the collection
-        Departments.insert({
-            name,
-        });    
+        Departments.update(this._id, {
+            $addToSet: { people: name, },
+        }); 
+
         template.$("#departmentName").val("");
         template.$(".department").toggle();
         

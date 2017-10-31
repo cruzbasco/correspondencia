@@ -46,3 +46,16 @@ Router.route("/department/:id", function () {
 	const department = Departments.findOne({ _id: this.params.id });
 	this.render("department", { data: department });
 });
+
+
+// User Profile
+Router.route("/configuration/userProfile", function() {
+	this.layout("navbar");
+    this.render("userProfile");
+});
+
+// Editable User Profile
+Router.route("/configuration/editableUserProfile", function() {
+	this.layout("navbar");	
+    this.render("editableUserProfile");
+});

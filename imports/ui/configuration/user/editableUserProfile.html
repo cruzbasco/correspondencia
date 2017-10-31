@@ -1,0 +1,48 @@
+<template name="editableUserProfile">
+    <div class="container">
+        <form class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Perfil de Usuario</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="user-name"><i class="fa fa-user"> Nombre</i></label>
+                    <div class="col-md-4">
+                        <input id="user-name" name="user-name" type="text" value="{{name}}" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="user-mail"><i class="fa fa-envelope-o"> Correo</i></label>
+                    <div class="col-md-4">
+                        <input id="user-mail" name="user-mail" type="email" value="{{mail}}" class="form-control input-md" disabled>
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="user-phone"><i class="fa fa-phone"> Telefono</i></label>
+                    <div class="col-md-4">
+                        <input id="user-phone" name="user-phone" type="text" value="{{phone}}" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for=""></label>
+                    <div class="col-md-4">
+                        <button id="" name="" class="btn btn-success">Guardar</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+
+    </div>
+</template>

@@ -30,7 +30,7 @@ Template.paperworkTypes.events({
         // Insert a task into the collection
         PaperworkTypes.insert({
             type,
-            
+            code : 0,
         });    
         
         template.$("#paperworkType").val("");
