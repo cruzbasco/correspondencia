@@ -14,3 +14,11 @@ Meteor.methods({
         Roles.removeUsersFromRoles(user_id, 'administrator');        
     }
 });
+
+// 'PaperworkTypes.increment'(type) {
+    
+//             PaperworkTypes.update(
+//                 { type: type },
+//                 { $inc: { code: 1 } },
+//             );
+//         }

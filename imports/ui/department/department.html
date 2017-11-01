@@ -1,57 +1,51 @@
 <template name="department">
-    <div class="form-horizontal">
-        <fieldset>
+    <div class="container">
+        <div class="form-horizontal">
+            <fieldset>
 
-            <!-- Form Name -->
-            <legend>{{name}}</legend>
-
-            <!-- Button -->
-            <div class="form-group department">
-                <label class="col-md-4 control-label" for="edit"></label>
-                <div class="col-md-4">
-                    <button id="edit" name="edit" class="btn btn-success">Nueva Persona</button>
-                </div>
-            </div>
-
-            <form class="form-deparment">
+                <!-- Form Name -->
+                <legend>Filtrar Usuarios</legend>
 
                 <!-- Text input-->
-                <div class="form-group department" style="display: none">
-                    <label class="col-md-4 control-label" for="department"> Nombre </label>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="user-mail"><i class="fa fa-search"></i> Buscar</label>
                     <div class="col-md-4">
-                        <input id="departmentName" name="departmentName" type="text" placeholder="" class="form-control input-md" required=""> 
-
+                        <input id="user-search" name="user-search" type="text" class="form-control input-md">
+                        <span class="help-block"></span>
                     </div>
                 </div>
 
-                <!-- Button (Double) -->
-                <div class="form-group department" style="display: none">
-                    <label class="col-md-4 control-label" for="save"></label>
-                    <div class="col-md-8">
-                        <button id="save" name="save" class="btn btn-success">Guardar</button>
-                        <button id="cancel" name="cancel" class="btn btn-default">Cancelar</button>
+            </fieldset>
+        </div>
+
+        <legend>Usuarios {{name}}</legend>
+        <div class="list-group">
+            {{#each users}}
+            <div class="list-group-item ">
+                <h4 class="list-group-item-heading">
+                    <div class="row">
+                        <div class="col-md-6">{{profile.name}}
+                            {{#if isMemberOf _id}}
+                            <small> Miembro</small>
+                            {{/if}}
+
+                        </div>
+                        <div class="col-md-6 text-right">
+                            {{#if isMemberOf _id}}
+                                <span id="remove" class="btn btn-sm btn-danger text-right">Remover</span>
+                            {{else}}
+                                <span id="add" class="btn btn-sm btn-success text-right ">Agregar</span>
+                            {{/if}}                                                        
+                        </div>
                     </div>
-                </div>
-            </form>
-
-        </fieldset>
-    </div>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Personas</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each people}}
-            <tr>
-                <td>{{this}}</td>
-            </tr>
+                </h4>
+                <p class="list-group-item-text">
+                    {{username}}
+                </p>
+            </div>
             {{/each}}
-        </tbody>
-    </table>
+        </div>
+    </div>
 
 
 

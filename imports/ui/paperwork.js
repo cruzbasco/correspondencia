@@ -60,6 +60,13 @@ Template.paperwork.helpers({
         return moment(createdAt).format('dddd, DD MMMM YYYY, h:mm:ss a');
     },
 
+    nameOf(personId) {
+        
+        let user =  Meteor.users.findOne({_id: personId});
+        console.log(user);
+        return user.profile.name;
+    }
+
 });
 
 Template.paperwork.events({
