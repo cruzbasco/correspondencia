@@ -26,7 +26,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="destination">Destino</label>
             <div class="col-md-4">
-                <input id="destination" name="destination" type="text" placeholder="" class="form-control input-md" readonly value="{{person}}">
+                <input id="destination" name="destination" type="text" placeholder="" class="form-control input-md" readonly value="{{nameOf person}}">
 
             </div>
         </div>
@@ -69,6 +69,8 @@
             <label class="col-md-4 control-label" for="subject">Asunto</label>
             <div class="col-md-4">
                 <textarea class="form-control" id="subject" name="subject" readonly>{{subject}}</textarea>
+                <p class="help-block">Documento firmado por {{nameOf signId}}</p>                
+                
             </div>
         </div>
 
@@ -77,7 +79,7 @@
             <label class="col-md-2 control-label" for="editor"></label>                    
             <div class="col-md-8">
                 <div id="editor">
-                    {{data}} lallalala
+                    {{data}}
                 </div>
             </div>
         </div>
@@ -137,7 +139,7 @@
                     </div>
                 </div>
 
-                <!-- Multiple Radios -->
+                <!-- Multiple Radios
                 <div class="form-group routes" style="display: none">
                     <label class="col-md-4 control-label" for="privacity ">Privacidad</label>
                     <div class="col-md-4">
@@ -154,7 +156,7 @@
                     </label>
                     </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Text input-->
                 <div class="form-group routes" style="display: none">
@@ -183,14 +185,16 @@
                 <th>Departamento</th>
                 <th>Persona</th>
                 <th>Fecha</th>
+                <th>Mensaje</th> 
             </tr>
         </thead>
         <tbody>
             {{#each routes}}
             <tr>
                 <td>{{route}}</td>
-                <td>{{person}}</td>
+                <td>{{nameOf person}}</td>
                 <td>{{convertDate createdAt}}</td>
+                <td>{{message}}</td>
             </tr>
             {{/each}}
         </tbody>

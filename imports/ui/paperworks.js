@@ -28,11 +28,9 @@ Template.paperworks.helpers({
   },
 
   nameOf(personId) {
-    
     let user =  Meteor.users.findOne({_id: personId});
-    console.log(user);
     return user.profile.name;
-}
+  },
 
 });
 

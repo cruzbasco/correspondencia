@@ -23,17 +23,15 @@ Template.newPaperwork.onRendered(function(){
         [{ 'font': [] }],
         [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
         
-        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-        ['blockquote', 'code-block'],
+        ['bold', 'italic', 'underline'],        // toggled buttons
 
         [{ 'align': [] }],        
       
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
         [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
       
-      
-        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-      
+        ['image'],
+        
         ['clean']                                         // remove formatting button
       ];
 
@@ -78,7 +76,6 @@ Template.newPaperwork.helpers({
     nameOf(personId) {
         
         let user =  Meteor.users.findOne({_id: personId});
-        console.log(user);
         return user.profile.name;
     }
 
@@ -99,6 +96,8 @@ Template.newPaperwork.events({
 
         const data = editor.getContents();
 
+        const signId = Meteor.userId();
+
         moment.locale('es');
         // Insert a task into the collection
         Paperworks.insert({
@@ -109,31 +108,38 @@ Template.newPaperwork.events({
             type,
             state,
             data,
+            signId,
             createdAt: Date.now(),
-            routes: [{route: route, person: person, createdAt: Date.now() }] ,
+            routes: [{route: route, person: person, createdAt: Date.now(), message: subject}] ,
         });
 
         Meteor.call('PaperworkTypes.increment', type);        
 
-
-
-        if (!Notification) {
-            alert('Desktop notifications not available in your browser. Try Chromium.'); 
-            return;
-          }
-        
-          if (Notification.permission !== "granted")
-            Notification.requestPermission();
-          else {
-            var notification = new Notification('Postman App', {
-              icon: 'https://scontent.flpb1-1.fna.fbcdn.net/v/t1.0-9/21149979_10155262279945376_4357735238076947498_n.jpg?oh=e6b39392ecb43295e8334a585d4e14e1&oe=5A25BDAD',
-              body: "Nueva correspondencia!",
+        let department = Departments.findOne({
+            $and :[ {name: route}, {people: {$in: [Meteor.userId()]}} ]
             });
         
-            notification.onclick = function () {
-              window.open('/pending');      
-            };
+        if (department !== null){
+            if (!Notification) {
+                alert('Desktop notifications not available in your browser. Try Chromium.'); 
+                return;
+              }
+            
+              if (Notification.permission !== "granted")
+                Notification.requestPermission();
+              else {
+                var notification = new Notification('Postman App', {
+                  icon: 'https://scontent.flpb1-1.fna.fbcdn.net/v/t1.0-9/21149979_10155262279945376_4357735238076947498_n.jpg?oh=e6b39392ecb43295e8334a585d4e14e1&oe=5A25BDAD',
+                  body: "Nueva correspondencia!",
+                });
+            
+                notification.onclick = function () {
+                  window.open('/pending');      
+                };
+            }
         }
+
+        
 
         Router.go('/paperworks');
     },

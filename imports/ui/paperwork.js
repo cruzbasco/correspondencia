@@ -63,9 +63,8 @@ Template.paperwork.helpers({
     nameOf(personId) {
         
         let user =  Meteor.users.findOne({_id: personId});
-        console.log(user);
         return user.profile.name;
-    }
+    },
 
 });
 
@@ -85,11 +84,12 @@ Template.paperwork.events({
         const target = event.target;
         const route = target.route.value;
         const person = target.person.value;
+        const message = target.message.value;
 
         moment.locale('es');
         // Insert a task into the collection
         Paperworks.update(this._id, {
-            $addToSet: { routes:  {route: route, person: person, createdAt: Date.now() } },
+            $addToSet: { routes:  {route: route, person: person, createdAt: Date.now(), message: message } },
         });
 
         template.$(".routes").toggle();

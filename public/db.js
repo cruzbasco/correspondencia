@@ -44,3 +44,8 @@ Users.insert(
     // ... otros campos creados por meteor
 }
 );
+
+{"guía telefónica":
+[{nombre: "Carlos Velarde", dirección: "Av. América #03", teléfono: 40323423},
+{nombre: "Martin Ayala", dirección: "c/ Laureano #A-2", teléfono: 41255653},
+{nombre: "Raúl Fuentes", dirección: "Av. Florida #64", teléfono: 48765535}]}
