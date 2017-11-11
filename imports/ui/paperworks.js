@@ -16,7 +16,7 @@ Template.paperworks.helpers({
     return Paperworks.find({
       $or: [
         { origin: { $regex: search, $options: 'mi' } },
-        { route: { $regex: search, $options: 'mi' } },
+        { department: { $regex: search, $options: 'mi' } },
         { person: { $regex: search, $options: 'mi' } },
         { state: { $regex: search, $options: 'mi' } },
         { createdAt: { $regex: search, $options: 'mi' } },

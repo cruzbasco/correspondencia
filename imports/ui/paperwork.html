@@ -17,7 +17,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="department">Departamento</label>
             <div class="col-md-4">
-                <input id="department" name="department" type="text" placeholder="" class="form-control input-md" readonly value="{{route}}">
+                <input id="department" name="department" type="text" placeholder="" class="form-control input-md" readonly value="{{department}}">
 
             </div>
         </div>
@@ -113,9 +113,9 @@
 
                 <!-- Select Basic -->
                 <div class="form-group routes" style="display: none">
-                    <label class="col-md-4 control-label" for="route">Departamento</label>
+                    <label class="col-md-4 control-label" for="department">Departamento</label>
                     <div class="col-md-4">
-                        <select id="route" name="route" class="form-control" required="">    
+                        <select id="department" name="department" class="form-control" required="">    
                         <option disabled>Seleccione un departamento</option>
                     
                         {{#each departments}}
@@ -139,24 +139,16 @@
                     </div>
                 </div>
 
-                <!-- Multiple Radios
+                <!-- Select Basic -->
                 <div class="form-group routes" style="display: none">
-                    <label class="col-md-4 control-label" for="privacity ">Privacidad</label>
+                    <label class="col-md-4 control-label" for="privacity">Privacidad</label>
                     <div class="col-md-4">
-                    <div class="radio">
-                    <label for="privacity -0">
-                        <input type="radio" name="privacity " id="privacity -0" value="Publico" checked="checked">
-                        Publico
-                    </label>
+                        <select id="privacity" name="privacity" class="form-control" required=""> 
+                            <option value="public" selected="selected">Publico</option>
+                            <option value="private">Privado</option>
+                    </select>
                     </div>
-                    <div class="radio">
-                    <label for="privacity -1">
-                        <input type="radio" name="privacity " id="privacity -1" value="Privado">
-                        Privado
-                    </label>
-                    </div>
-                    </div>
-                </div> -->
+                </div>
 
                 <!-- Text input-->
                 <div class="form-group routes" style="display: none">
@@ -191,10 +183,10 @@
         <tbody>
             {{#each routes}}
             <tr>
-                <td>{{route}}</td>
+                <td>{{department}}</td>
                 <td>{{nameOf person}}</td>
                 <td>{{convertDate createdAt}}</td>
-                <td>{{message}}</td>
+                <td>{{isPublic}}</td>
             </tr>
             {{/each}}
         </tbody>

@@ -91,7 +91,7 @@ Template.newPaperwork.events({
         const subject = target.subject.value;
         const type = target.type.value;
         const state = target.state.value;
-        const route = target.route.value;
+        const department = target.department.value;
         const person = target.person.value;
 
         const data = editor.getContents();
@@ -102,7 +102,7 @@ Template.newPaperwork.events({
         // Insert a task into the collection
         Paperworks.insert({
             origin,
-            route,
+            department,
             person,
             subject,
             type,
@@ -110,16 +110,12 @@ Template.newPaperwork.events({
             data,
             signId,
             createdAt: Date.now(),
-            routes: [{route: route, person: person, createdAt: Date.now(), message: subject}] ,
+            routes: [{department, person, createdAt: Date.now(), message: subject,privacity: "public"}] ,
         });
 
         Meteor.call('PaperworkTypes.increment', type);        
 
-        let department = Departments.findOne({
-            $and :[ {name: route}, {people: {$in: [Meteor.userId()]}} ]
-            });
         
-        if (department !== null){
             if (!Notification) {
                 alert('Desktop notifications not available in your browser. Try Chromium.'); 
                 return;
@@ -137,7 +133,6 @@ Template.newPaperwork.events({
                   window.open('/pending');      
                 };
             }
-        }
 
         
 

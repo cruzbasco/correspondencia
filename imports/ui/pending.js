@@ -15,13 +15,20 @@ Template.pending.onCreated(function(){
 Template.pending.helpers({
   paperworks() {
     const search = Template.instance().search.get();
-    let department = Departments.findOne({people: {$in: [Meteor.userId()]}});
+
+    let departments = Departments.find({people: {$in: [Meteor.userId()]}}).fetch();
+    let departmentNames = [];
+
+    for(i = 0 ; i < departments.length; i++){
+	departmentNames.push(departments[i].name);
+    }
+
     return Paperworks.find({
       $and: [
-        {route: department.name},
+        {department: {$in: departmentNames}},
         {$or: [
           { origin: { $regex: search, $options: 'mi' } },
-          { route: { $regex: search, $options: 'mi' } },
+          { department: { $regex: search, $options: 'mi' } },
           { person: { $regex: search, $options: 'mi' } },
           { state: { $regex: search, $options: 'mi' } },
           { createdAt: { $regex: search, $options: 'mi' } },
@@ -49,7 +56,12 @@ Template.pending.events({
 });
 
 Template.registerHelper('number', () => {
-    let department = Departments.findOne({people: {$in: [Meteor.userId()]}});
+    let departments = Departments.find({people: {$in: [Meteor.userId()]}}).fetch();
+    let departmentNames = [];
 
-    return Paperworks.find({route: department.name}).count();
+    for(i = 0 ; i < departments.length; i++){
+	departmentNames.push(departments[i].name);
+    }
+
+    return Paperworks.find({department: {$in: departmentNames}}).count();
 });

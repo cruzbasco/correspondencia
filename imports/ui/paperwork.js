@@ -10,12 +10,12 @@ import './paperwork.html';
 
 let editor;
 
-Template.paperwork.onCreated(function(){
-        this.selectedDepartment = new ReactiveVar(null);   
-       
+Template.paperwork.onCreated(function () {
+    this.selectedDepartment = new ReactiveVar(null);
+
 });
 
-Template.paperwork.onRendered(function(){
+Template.paperwork.onRendered(function () {
     const toolbar = [];
     editor = new Quill('#editor', {
         modules: {
@@ -29,25 +29,25 @@ Template.paperwork.onRendered(function(){
 
 Template.paperwork.helpers({
 
-    selectedState(state){
-        if (state === this.state){
+    selectedState(state) {
+        if (state === this.state) {
             return 'selected';
         }
     },
 
-    selectedType(type){
-        if (type === this.type){
+    selectedType(type) {
+        if (type === this.type) {
             return 'selected';
         }
     },
 
-    departments(){
+    departments() {
         return Departments.find({}, { sort: { name: 1 } });
     },
 
-    people(){
+    people() {
         const selectedDepartment = Template.instance().selectedDepartment.get();
-        
+
         if (selectedDepartment !== null) {
             return (Departments.findOne({ name: selectedDepartment })).people;
         } else {
@@ -61,44 +61,55 @@ Template.paperwork.helpers({
     },
 
     nameOf(personId) {
-        
-        let user =  Meteor.users.findOne({_id: personId});
+
+        let user = Meteor.users.findOne({ _id: personId });
         return user.profile.name;
     },
+    
+    isPublic() {
+        if (this.privacity == "public" || this.person == Meteor.userId() || this.owner == Meteor.userId()){
+            return this.message;
+        } else {
+            return "Mensaje privado.";
+        }
+    }
 
 });
 
 Template.paperwork.events({
     'click #edit'(event, template) {
-        event.preventDefault();        
+        event.preventDefault();
         template.$(".routes").toggle();
     },
     'click #cancel'(event, template) {
         event.preventDefault();
         template.$(".routes").toggle();
     },
-    'submit .form-routes'(event, template){
+    'submit .form-routes'(event, template) {
         event.preventDefault();
-        
+
         // Get value from form element
         const target = event.target;
-        const route = target.route.value;
+        const department = target.department.value;
         const person = target.person.value;
         const message = target.message.value;
+        const privacity = target.privacity.value;
+
+        const owner = Meteor.userId();
 
         moment.locale('es');
         // Insert a task into the collection
         Paperworks.update(this._id, {
-            $addToSet: { routes:  {route: route, person: person, createdAt: Date.now(), message: message } },
+            $addToSet: { routes: { owner, department, person, createdAt: Date.now(), message, privacity } },
         });
 
         template.$(".routes").toggle();
-        
+
     },
-    'change #route'(event, template){
-        const target = event.target;    
+    'change #route'(event, template) {
+        const target = event.target;
         template.selectedDepartment.set(target.value);
-    }
+    },
 
 
 });
