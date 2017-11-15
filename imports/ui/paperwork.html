@@ -13,23 +13,15 @@
             </div>
         </div>
 
-        <!-- Text input-->
+        {{#each recipients}}
+        <!-- Appended Input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="department">Departamento</label>
+            <label class="col-md-4 control-label" for="appendedtext">Destino</label>
             <div class="col-md-4">
-                <input id="department" name="department" type="text" placeholder="" class="form-control input-md" readonly value="{{department}}">
-
+                <input id="{{person}}" name="appendedtext" class="form-control input-md" type="text" value="{{department}} - {{nameOf person}}" readonly>
             </div>
         </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="destination">Destino</label>
-            <div class="col-md-4">
-                <input id="destination" name="destination" type="text" placeholder="" class="form-control input-md" readonly value="{{nameOf person}}">
-
-            </div>
-        </div>
+        {{/each}}
 
         <!-- Text input-->
         <div class="form-group">

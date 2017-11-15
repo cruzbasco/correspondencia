@@ -3,7 +3,7 @@ Paperworks.insert(
 {
     _id, // id asignado por mongo por defecto
     origin, // origen de la correspondencia, remitente
-    destinatary : {department, person}, // destinatario con formato (departamento, persona)
+    recipients : [{department, person}], // conjunto de destinatarios con formato (departamento, persona)
     subject, // titulo del asunto a tratar
     bookmark: {type,code}, // tipo de correspondecia (tipo, codigo)
     state, // estado de la correspondencia

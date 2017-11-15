@@ -42,6 +42,42 @@
                 </div>
             </div>
 
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="addRecipient"></label>
+                <div class="col-md-4">
+                    <a id="addRecipient" name="addRecipient" class="btn btn-primary">Agregar Destinatario</a>
+                </div>
+            </div>
+  
+
+            {{#if haverecipients}}
+
+                {{#each recipients}}
+                <!-- Appended Input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="appendedtext"></label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input id="{{person}}" name="appendedtext" class="form-control" type="text" value="{{department}} - {{nameOf person}}">
+                            <div class="input-group-btn">
+                                <a id="removeRecipient" name="removeRecipient" class="btn btn-danger">Quitar</a>                        
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
+                {{/each}}
+            {{else}}
+                <div class="form-grup">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">No hay destinatarios</div>
+                </div>
+                <br>
+                <br>
+                
+            {{/if}}
+
             <!-- Select Basic -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="type">Tipo de correspondencia</label>

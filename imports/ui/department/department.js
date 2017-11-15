@@ -39,15 +39,12 @@ Template.department.helpers({
 Template.department.events({
     'keyup #user-search': function(event, template) {
         var searchText = template.$('#user-search').val();
-        
         Session.set('searchText', searchText);
     },
     'click #add' : function(event, template) {
-        console.log('prmote');
         Meteor.call('Departments.addPerson', template.data.name, this._id);
     },
     'click #remove' : function(event, template) {
-        console.log('remove');
         Meteor.call('Departments.removePerson', template.data.name, this._id);
     }
 });

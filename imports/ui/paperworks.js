@@ -15,13 +15,12 @@ Template.paperworks.helpers({
 
     return Paperworks.find({
       $or: [
-        { origin: { $regex: search, $options: 'mi' } },
-        { department: { $regex: search, $options: 'mi' } },
-        { person: { $regex: search, $options: 'mi' } },
-        { state: { $regex: search, $options: 'mi' } },
-        { createdAt: { $regex: search, $options: 'mi' } },
+        { origin: { $regex: search, $options: 'i' } },
+        { 'recipients.department': { $regex: search, $options: 'i' } },
+        { 'recipients.person': { $regex: search, $options: 'i' } },
+        { state: { $regex: search, $options: 'i' } },
       ]
-    }, { sort: { createdAt: -11 } });
+    }, { sort: { createdAt: -1 } });
   },
   convertDate(createdAt){
     return moment(createdAt).format('dddd, DD MMMM YYYY, h:mm:ss a');
@@ -38,7 +37,7 @@ Template.paperworks.helpers({
 Template.paperworks.events({
   'keyup #search'(event, template) {
     let search = template.$('#search').val();
-    search = "^" + search;
+    // search = "^" + search;
     template.search.set(search);
   }
 });
