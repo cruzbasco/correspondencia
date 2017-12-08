@@ -26,10 +26,19 @@ Router.route("/paperwork/:id", function () {
 	this.render("paperwork", { data: paperwork });
 });
 
+Router.route("/paperworkWatchers/:id", function () {
+	this.layout("navbar");
+	const paperwork = Paperworks.findOne({ _id: this.params.id });
+	this.render("paperworkWatchers", { data: paperwork });
+});
+
 Router.route("/paperworkTypes", function () {
 	this.layout("navbar");
 	this.render("paperworkTypes");
 });
+
+
+
 
 Router.route("/pending", function () {
 	this.layout("navbar");

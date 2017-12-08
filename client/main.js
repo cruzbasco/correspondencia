@@ -1,6 +1,7 @@
 import '../imports/ui/homepage.js';
 import '../imports/ui/paperworks.js';
 import '../imports/ui/paperwork.js';
+import '../imports/ui/paperworkWatchers.js';
 import '../imports/ui/paperworkTypes.js';
 import '../imports/ui/newPaperwork.js';
 import '../imports/ui/pending.js';

@@ -106,6 +106,8 @@ Template.newPaperwork.events({
         const department = target.department.value;
         const person = target.person.value;
 
+        const watchers = [];
+
         const data = editor.getContents();
 
         const signId = Meteor.userId();
@@ -121,6 +123,7 @@ Template.newPaperwork.events({
             data,
             signId,
             createdAt: Date.now(),
+            watchers,
             routes: [{ department, person, createdAt: Date.now(), message: subject, privacity: "public" }],
         });
 

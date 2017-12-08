@@ -1,15 +1,16 @@
 <template name='paperwork'>
+
+    <div class="text-right">
+        <a href="/paperworkWatchers/{{_id}}" class="btn btn-success watched"><i class="fa fa-eye"> Visto</i> </a>
+    </div>
     <fieldset class="form-horizontal">
 
         <!-- Form Name -->
         <legend>Detalle Carta</legend>
-
-        <!-- Text input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="origin">Origen</label>
+            <label class="col-md-4 control-label" for="save"></label>
             <div class="col-md-4">
-                <input id="origin" name="origin" type="text" placeholder="" class="form-control input-md" readonly value="{{origin}}">
-
+                <a href="/paperworks" class="btn btn-default btn-block">Atras</a>
             </div>
         </div>
 

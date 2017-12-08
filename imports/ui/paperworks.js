@@ -7,6 +7,8 @@ import './paperworks.html';
  
 Template.paperworks.onCreated(function(){
         this.search = new ReactiveVar("");
+
+        
 });
 
 Template.paperworks.helpers({

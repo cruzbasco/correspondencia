@@ -12,7 +12,7 @@ let editor;
 
 Template.paperwork.onCreated(function () {
     this.selectedDepartment = new ReactiveVar(null);
-
+    
 });
 
 Template.paperwork.onRendered(function () {
@@ -110,6 +110,26 @@ Template.paperwork.events({
         const target = event.target;
         template.selectedDepartment.set(target.value);
     },
+     'click .watched' (event, template) {
 
+        console.log (template.data);
+        let w = template.data.watchers;
+        
+            
+            let resp = false;
+            for (let i = 0; i < w.length; i++) {
+        
+                if (w[i] == Meteor.userId()) {
+                    resp = true;
+                }
+        
+            }
+        
+            if (resp == false) {
+                Paperworks.update(this._id, {
+                    $addToSet: { watchers: { watcher: Meteor.userId() } },
+                });
+            }
+     }
 
 });

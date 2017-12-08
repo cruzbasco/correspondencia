@@ -31,10 +31,16 @@
             {{#each paperworks}}
             <tr>
                 <td>{{origin}}</td>
-                <td>{{route}}</td>
-                <td>{{nameOf person}}</td>
+                <td>{{#each recipients}}
+                    {{department}} <br>
+                    {{/each}}
+                </td>
+                <td>{{#each recipients}}
+                    {{nameOf person}} <br>
+                    {{/each}}
+                </td>
                 <td>{{convertDate createdAt}}</td>
-                <!-- <td><a href="#" class="btn btn-info">Detalle</a></td> -->
+                <!-- <td><a href="/paperwork/{{_id}}" class="btn btn-info">Detalle</a></td> -->
             </tr>
             {{/each}}
         </tbody>
