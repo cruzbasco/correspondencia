@@ -56,6 +56,24 @@ Router.route("/department/:id", function () {
 	this.render("department", { data: department });
 });
 
+Router.route("/reports/type2", function () {
+	this.layout("navbar");
+	this.render("report2");
+});
+
+Router.route("/reports/type3", function () {
+	this.layout("navbar");
+	this.render("report3");
+});
+
+Router.route("/reports/type4", function () {
+	this.layout("navbar");
+	this.render("report4");
+});
+Router.route("/reports/type5", function () {
+	this.layout("navbar");
+	this.render("report5");
+});
 
 // User Profile
 Router.route("/configuration/userProfile", function() {

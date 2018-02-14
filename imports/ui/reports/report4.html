@@ -1,0 +1,93 @@
+
+<template name="report4">
+        <div class="container">
+            <div >
+                <form class="form-horizontal">
+                    <fieldset>
+    
+                        <!-- Form Name -->
+                        <legend>Tiempo de respuesta por destinatario especifico</legend>
+    
+                        <!-- Select Basic -->
+                        <div class="form-group routes">
+                            <label class="col-md-4 control-label" for="person">Persona</label>
+                            <div class="col-md-4">
+                                <select id="person" name="person" class="form-control" > 
+                                    <option value="todos">Seleccione una persona</option>
+                                
+                                    {{#each people }}
+                                    <option value="{{_id}}">{{profile.name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="from"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                Desde</label>
+                            <div class="col-md-4">
+                                <input id="from" name="from" type="date"  class="form-control input-md" required="">
+    
+                            </div>
+                        </div>
+    
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="to"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                Hasta</label>
+                            <div class="col-md-4">
+                                <input id="to" name="to" type="date" data-date-format="DD MMMM YYYY" class="form-control input-md" required="">
+    
+                            </div>
+                        </div>
+    
+                        <!-- Button -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="search"></label>
+                            <div class="col-md-4">
+                                <button id="search" name="search" class="btn btn-success">Aceptar</button>
+                            </div>
+                        </div>
+    
+                    </fieldset>
+                </form>
+            </div>
+            <br>
+            <br>
+            <br>
+            {{#if resume}}
+                <div class="text-right">
+                    <button id="pdf" class="btn btn-success">Exportar PDF</button>
+                </div>
+                <table id="exportTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Destinatario</th>                            
+                            <th>Tipo de correspondencia</th>
+                            <th>Tiempo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each r in resume}}
+                            {{#each r.data}}
+                            <tr>
+                                <td>{{nameOf r.personId}}</td>
+                                <td>{{type}}</td>                        
+                                <td>{{convert time}}</td>
+                            </tr>
+                            {{/each}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{/if}}
+            <div id="canvas" style="height: 300px; width: 100%;"></div>
+
+        </div>
+
+        <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+        <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+        <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    </template>

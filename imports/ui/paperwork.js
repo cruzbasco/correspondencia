@@ -106,7 +106,7 @@ Template.paperwork.events({
         template.$(".routes").toggle();
 
     },
-    'change #route'(event, template) {
+    'change #department'(event, template) {
         const target = event.target;
         template.selectedDepartment.set(target.value);
     },

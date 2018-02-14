@@ -15,6 +15,9 @@ Meteor.methods({
     }
 });
 
+Meteor.publish("allUsers", function () {
+    return Meteor.users.find({});
+  });
 // 'PaperworkTypes.increment'(type) {
     
 //             PaperworkTypes.update(

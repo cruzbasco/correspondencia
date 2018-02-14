@@ -72,10 +72,6 @@ Template.newPaperwork.helpers({
         return PaperworkTypes.find({}, { sort: { type: 1 } });
     },
 
-    convertDate(createdAt) {
-        return moment(createdAt).format('dddd, DD MMMM YYYY, h:mm:ss a');
-    },
-
     nameOf(personId) {
 
         let user = Meteor.users.findOne({ _id: personId });
@@ -112,7 +108,10 @@ Template.newPaperwork.events({
 
         const signId = Meteor.userId();
 
+
         moment.locale('es');
+
+        const createdAt = new Date();
         // Insert a task into the collection
         Paperworks.insert({
             origin,
@@ -122,9 +121,10 @@ Template.newPaperwork.events({
             state,
             data,
             signId,
-            createdAt: Date.now(),
+            createdAt,
+            createdAtWithFormat: moment(createdAt).format('DD MMMM YYYY, HH:MM'),
             watchers,
-            routes: [{ department, person, createdAt: Date.now(), message: subject, privacity: "public" }],
+            routes: [{ department, person, createdAt: createdAt, message: subject, privacity: "public" }],
         });
 
         Meteor.call('PaperworkTypes.increment', type);
@@ -139,7 +139,7 @@ Template.newPaperwork.events({
             Notification.requestPermission();
         else {
             var notification = new Notification('Postman App', {
-                icon: 'https://scontent.flpb1-1.fna.fbcdn.net/v/t1.0-9/21149979_10155262279945376_4357735238076947498_n.jpg?oh=e6b39392ecb43295e8334a585d4e14e1&oe=5A25BDAD',
+                icon: 'https://scontent.flpb1-1.fna.fbcdn.net/v/t1.0-9/21149979_10155262279945376_4357735238076947498_n.jpg?oh=0c1c235ae818ca5109a2e4bf961e909e&oe=5AEB7EAD',
                 body: "Nueva correspondencia!",
             });
 
@@ -165,7 +165,10 @@ Template.newPaperwork.events({
         let department = template.$('#department').val();
         let person = template.$('#person').val();
 
-        recipients.push ({department, person});
+        let user = Meteor.users.findOne({ _id: person });
+        let personName = user.profile.name;
+
+        recipients.push ({department, person, personName});
 
         template.recipients.set (recipients);
     },

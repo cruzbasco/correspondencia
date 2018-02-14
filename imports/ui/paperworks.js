@@ -19,13 +19,14 @@ Template.paperworks.helpers({
       $or: [
         { origin: { $regex: search, $options: 'i' } },
         { 'recipients.department': { $regex: search, $options: 'i' } },
-        { 'recipients.person': { $regex: search, $options: 'i' } },
+        { 'recipients.personName': { $regex: search, $options: 'i' } },
         { state: { $regex: search, $options: 'i' } },
+        { createdAtWithFormat: { $regex: search, $options: 'i' } },
       ]
     }, { sort: { createdAt: -1 } });
   },
   convertDate(createdAt){
-    return moment(createdAt).format('dddd, DD MMMM YYYY, h:mm:ss a');
+    return moment(createdAt).format('DD MMMM YYYY, HH:MM');
   },
 
   nameOf(personId) {
