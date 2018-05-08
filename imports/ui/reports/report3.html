@@ -41,7 +41,8 @@
         <br>
         <br>
         <br>
-        {{#if resume}}
+        {{#if isPressed}}
+            {{#if checkLength resume}}
             <div class="text-right">
                 <button id="pdf" class="btn btn-success">Exportar PDF</button>
             </div>
@@ -61,6 +62,11 @@
                     {{/each}}
                 </tbody>
             </table>
+            {{else}}
+
+                <h2 class="text-center">No hay datos entre las fechas seleccionadas</h2>
+
+            {{/if}}
         {{/if}}
             
         <div id="canvas" style="height: 300px; width: 100%;"></div>

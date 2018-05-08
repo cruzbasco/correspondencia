@@ -9,6 +9,7 @@ import './report5.html';
 
 Template.report5.onCreated(function () {
     this.resume = new ReactiveVar(null);
+    this.isPressed = new ReactiveVar(false);    
 });
 
 Template.report5.helpers({
@@ -28,6 +29,15 @@ Template.report5.helpers({
 
         return result;
     },
+    checkLength(resume) {
+        if (resume.length > 0)
+            return true;
+        return false;
+        
+    },
+    isPressed() {
+        return Template.instance().isPressed.get();
+    }
 
 });
 
@@ -42,6 +52,7 @@ Template.report5.events({
         let resume = reports.type5(from, to);
 
         template.resume.set(resume);
+        template.isPressed.set(true);
 
 
 
@@ -68,6 +79,8 @@ Template.report5.events({
                 
             }]
         });
+        
+        if (graph.length > 0)        
         chart.render();
     },
 

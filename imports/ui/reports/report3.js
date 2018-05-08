@@ -9,6 +9,8 @@ import './report3.html';
 
 Template.report3.onCreated(function () {
     this.resume = new ReactiveVar(null);
+    this.isPressed = new ReactiveVar(false);
+    
 });
 
 Template.report3.helpers({
@@ -43,6 +45,15 @@ Template.report3.helpers({
         let user = Meteor.users.findOne({ _id: personId });
         return user.profile.name;
     },
+    checkLength(resume) {
+        if (resume.length > 0)
+            return true;
+        return false;
+        
+    },
+    isPressed() {
+        return Template.instance().isPressed.get();
+    }
 
 });
 
@@ -57,6 +68,8 @@ Template.report3.events({
         let resume = reports.type3(from, to);
 
         template.resume.set(resume);
+        template.isPressed.set(true);
+        
 
 
         let graph = Object.keys(resume).map(function(key) {
@@ -72,7 +85,9 @@ Template.report3.events({
                 
             }]
         });
-        chart.render();
+
+        if (graph.length > 0)    
+            chart.render();
 
     },
     'click #pdf'(event,template) {

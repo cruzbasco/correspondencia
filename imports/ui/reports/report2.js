@@ -10,13 +10,14 @@ import './report2.html';
 
 Template.report2.onCreated(function () {
     this.resume = new ReactiveVar(null);
+    this.isPressed = new ReactiveVar(false);
     this.chart = new ReactiveVar(null);
 });
 
 Template.report2.helpers({
     resume() {
         let resume = Template.instance().resume.get();
-
+        console.log(resume);
         return resume;
     },
     convert(time) {
@@ -35,7 +36,18 @@ Template.report2.helpers({
             
             resp += minutes + " Minutos " 
         return resp;
+    },
+    checkLength(resume) {
+        if (resume.length > 0)
+            return true;
+        return false;
+        
+    },
+    isPressed() {
+        return Template.instance().isPressed.get();
     }
+
+
 
 });
 
@@ -53,6 +65,7 @@ Template.report2.events({
         })
 
         template.resume.set(result);
+        template.isPressed.set(true);
 
         let graph = Object.keys(resume).map(function(key) {
             return {"label" : key ,"y" : Math.floor(resume[key].sum / resume[key].cont)}
@@ -71,7 +84,9 @@ Template.report2.events({
                 
             }]
         });
-        chart.render();
+
+        if (graph.length > 0)
+            chart.render();
         
         
     },

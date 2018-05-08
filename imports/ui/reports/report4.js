@@ -10,6 +10,7 @@ import './report4.html';
 Template.report4.onCreated(function () {
     this.resume = new ReactiveVar(null);
     this.personId = new ReactiveVar(null);
+    this.isPressed = new ReactiveVar(false);    
     Meteor.subscribe('allUsers');
 });
 
@@ -58,6 +59,15 @@ Template.report4.helpers({
         let users = Meteor.users.find({});
         return users;
     },
+    checkLength(resume) {
+        if (resume.length > 0)
+            return true;
+        return false;
+        
+    },
+    isPressed() {
+        return Template.instance().isPressed.get();
+    }
 
 });
 
@@ -73,27 +83,36 @@ Template.report4.events({
 
         template.resume.set(resume);
         template.personId.set(personId);
+        template.isPressed.set(true);        
+
 
 
         let graph = Object.keys(resume).map(function(key) {
-            return  Object.keys(resume[key]).map(function(secondKey){
-                return {"label": secondKey, "y": resume[key][secondKey]}
-            })
+            return{ "userID": key,
+                 "data" :  Object.keys(resume[key]).map(function(secondKey){
+                    return {"label": secondKey, "y": resume[key][secondKey] }
+                })
+            }   
         
         })
 
-        console.log(graph);
 
+        graph = graph.filter(function(el) {
+            return el.userID === personId;
+        });
+
+        const graphData = graph[0].data;
+        
         var chart = new CanvasJS.Chart("canvas", {
             animationEnabled: true,
-            
             data: [{
                 type: "column",
-                dataPoints: graph[4]
+                dataPoints: graphData
                 
             }]
         });
-        chart.render();
+        if (personId !== "todos" && graphData.length > 0 )        
+            chart.render();
     },
 
     'click #pdf'(event,template) {
